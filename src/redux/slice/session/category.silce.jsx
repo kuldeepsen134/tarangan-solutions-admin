@@ -11,7 +11,7 @@ export const addCategories = createAsyncThunk(
   "/categories/register",
   async (params, { rejectWithValue }) => {
     try {
-      return await instance.post("/categories", params);
+      return await instance.post("/product-categories", params);
     } catch (error) {
       return rejectWithValue(error.responce);
     }
@@ -22,7 +22,7 @@ export const categoriesList = createAsyncThunk(
   "/categories",
   async (params, { rejectWithValue }) => {
     try {
-      return await instance.get(`/categories`);
+      return await instance.get(`/product-categories`);
     } catch (error) {
       return rejectWithValue(error.responce);
     }

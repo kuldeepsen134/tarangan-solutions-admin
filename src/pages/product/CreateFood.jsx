@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { addFood } from "../../redux/slice/session/food.slice";
 import { categoriesList } from "../../redux/slice/session/category.silce";
+import { addProduct } from "../../redux/slice/session/product.slice";
 
 const CreateFood = () => {
   const navigate = useNavigate();
@@ -66,7 +66,7 @@ const CreateFood = () => {
     }),
 
     onSubmit: (values) => {
-      dispatch(addFood(values))
+      dispatch(addProduct (values))
         .unwrap()
         .then((data) => {
           if (!data.error) {
@@ -250,7 +250,7 @@ const CreateFood = () => {
                     className="form-select"
                   >
                     <option value="">Select Category</option>
-                    {getcategories.map((category) => (
+                    {getcategories?.map((category) => (
                       <option key={category.id} value={category.id}>
                         {category.name}
                       </option>

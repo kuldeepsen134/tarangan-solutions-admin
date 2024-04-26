@@ -25,7 +25,6 @@ const CreateCategories = () => {
 
     onSubmit: (values) => {
       dispatch(addCategories(values))
-        .unwrap()
         .then((data) => {
           if (!data.error) {
             navigate("/categories");

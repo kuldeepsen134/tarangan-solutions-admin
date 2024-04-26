@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import SideBar from "../../Components/SideBar";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  categoriesList,
-  categoriesTrush,
-} from "../../redux/slice/session/category.silce";
+import { categoriesList, categoriesTrush} from "../../redux/slice/session/category.silce";
 
 const Categories = () => {
+
   const [categories, setCategories] = useState([]);
   const { categoriesData } = useSelector((state) => state.categories);
   const dispatch = useDispatch();
@@ -19,7 +17,7 @@ const Categories = () => {
         setCategories(categories?.items);
         console.log(categories.items);
       });
-  }, [categoriesData]);
+  }, [categoriesData, dispatch]);
 
   const handleDeleteCategories = (categoryId) => {
     dispatch(categoriesTrush(categoryId))
@@ -69,7 +67,7 @@ const Categories = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {categories.map((category) => (
+                      {categories?.map((category) => (
                         <tr key={category.id}>
                           <td>{category.id}</td>
                           <td>{category.name}</td>

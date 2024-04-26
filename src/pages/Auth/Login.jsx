@@ -34,7 +34,7 @@ const Login = () => {
       dispatch(login(values))
         .unwrap()
         .then(() => {
-          navigate("/home");
+          navigate("/dashboard");
         });
     },
   });

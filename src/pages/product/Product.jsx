@@ -2,29 +2,28 @@ import React, { useEffect, useState } from "react";
 import SideBar from "../../Components/SideBar";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { userList, userTrush } from "../../redux/slice/session/user.slice";
-import { foodList } from "../../redux/slice/session/food.slice";
+import { productList } from "../../redux/slice/session/product.slice";
+import { userTrush } from "../../redux/slice/session/user.slice";
 
-const Foods = () => {
+const ProductPage = () => {
   const [getFood, setFood] = useState([]);
-  const { foodData } = useSelector((state) => state.user);
+  const { productData } = useSelector((state) => state.products);
 
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(foodList())
-      .unwrap()
-      .then((foods) => {
-        setFood(foods?.items);
-        console.log(foods.items);
+    dispatch(productList())
+      .then((products) => {
+        setFood(products?.items);
+        console.log(products.items);
       });
-  }, [foodData]);
+  }, [dispatch, productData]);
 
   const handleDeleteFood = (foodId) => {
     dispatch(userTrush(foodId))
-      .then(() => foodList())
+      .then(() => productList())
       .unwrap()
       .then((food) => {
         setFood(food?.data);
@@ -71,7 +70,7 @@ const Foods = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {getFood.map((food) => (
+                    {getFood?.map((food) => (
                       <tr key={food.id} className="">
                         <td>{food?.name}</td>
                         <td>
@@ -126,4 +125,4 @@ const Foods = () => {
   );
 };
 
-export default Foods;
+export default ProductPage;

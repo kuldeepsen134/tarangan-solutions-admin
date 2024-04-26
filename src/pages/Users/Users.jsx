@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from "react";
 import SideBar from "../../Components/SideBar";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  userList,
-  userListById,
-  userTrush,
-} from "../../redux/slice/session/user.slice";
+import { userList, userTrush } from "../../redux/slice/session/user.slice";
 import CreateUser from "./CreateUser";
 import UpdateUser from "./UpdateUser";
 
@@ -14,7 +10,6 @@ const Users = () => {
   const [users, setUsers] = useState([]);
   const { userData } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Import useNavigate
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
 
@@ -66,14 +61,9 @@ const Users = () => {
           </div>
           <div className="col-sm-10 pt-5 border-start">
             <div className="text-end">
-              <button
-                type="button"
-                className="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#CreateModal"
-              >
-                Add Users
-              </button>
+              <Link className="btn btn-success text-white" to="/createusers">
+              Add Users
+            </Link>
             </div>
             <h3 className="table-head bg-white p-2 mt-3"> User Table</h3>
             <section className="mt-4 boxborder">
@@ -91,7 +81,7 @@ const Users = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {users.map((user) => (
+                      {users?.map((user) => (
                         <tr key={user.id} className="">
                           <td>{user?.first_name}</td>
                           <td>{user?.last_name}</td>

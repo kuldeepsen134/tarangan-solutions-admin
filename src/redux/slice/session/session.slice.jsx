@@ -33,7 +33,7 @@ const sessionSlice = createSlice({
         state.loading = false;
         state.isUserLoggedIn = true;
         state.loggedInUser = action.payload;
-        localStorage.setItem("token", action.payload.data.token);
+        localStorage.setItem("token", action.payload.token);
         toast.success(action.payload.message);
         console.log("Login successful. Result:", action.payload);
       })
