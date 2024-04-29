@@ -11,7 +11,7 @@ export const register = createAsyncThunk(
   "account/register",
   async (params, { rejectWithValue }) => {
     try {
-      return await instance.post("/users/register", params);
+      return await instance.post("/users", params);
     } catch (error) {
       return rejectWithValue(error.responce);
     }
@@ -40,23 +40,18 @@ export const userList = createAsyncThunk(
 //   }
 // );
 
-export const userUpdate = createAsyncThunk(
-  "/users/update",
-  async ({ id, userData }, { rejectWithValue }) => {
+export const userUpdate = createAsyncThunk( "/users/update", async (params, { rejectWithValue }) => {
     try {
-      return await instance.patch(`users/${id}`, userData);
+      return await instance.patch(`users/${params._id}`, params);
     } catch (error) {
       return rejectWithValue(error.response);
     }
   }
 );
 
-
-export const userTrush = createAsyncThunk(
-  "users/trush",
-  async (id, { rejectWithValue }) => {
+export const userTrush = createAsyncThunk( "users/trush", async (id, { rejectWithValue }) => {
     try {
-      return await instance.delete(`users/${id}` );
+      return await instance.delete(`users/${id}`);
     } catch (error) {
       return rejectWithValue(error.responce);
     }
@@ -64,10 +59,10 @@ export const userTrush = createAsyncThunk(
 );
 
 export const userListById = createAsyncThunk(
-  "users/list/id",
+  "users/:id",
   async (id, { rejectWithValue }) => {
     try {
-      return await instance.get(`users/${id}` , console.log("listbyid",id));
+      return await instance.get(`users/${id}`);
     } catch (error) {
       return rejectWithValue(error.responce);
     }
@@ -92,6 +87,7 @@ const userSlice = createSlice({
         state.loading = false;
         state.userList = {};
       })
+
       .addCase(userTrush.pending, (state) => {
         state.loading = false;
         state.userlistData = {};
@@ -105,31 +101,33 @@ const userSlice = createSlice({
         state.loading = false;
         state.userList = {};
       })
+
       .addCase(userUpdate.pending, (state) => {
         state.loading = false;
-        state.userlistData = {};
+        state.userData = {};
       })
       .addCase(userUpdate.fulfilled, (state, action) => {
         state.loading = false;
-        state.userlistData = action.payload;
+        state.userData = action.payload;
         toast.success(action.payload.message);
       })
       .addCase(userUpdate.rejected, (state) => {
         state.loading = false;
-        state.userList = {};
+        state.userData = {};
       })
+
       // Handle userListById actions
       .addCase(userListById.pending, (state) => {
         state.loading = false;
-        state.userlistData = {};
+        state.userData = {};
       })
       .addCase(userListById.fulfilled, (state, action) => {
         state.loading = false;
-        state.userlistData = action.payload;
+        state.userData = action.payload;
       })
       .addCase(userListById.rejected, (state) => {
         state.loading = false;
-        state.userList = {};
+        state.userData = {};
       });
   },
 });

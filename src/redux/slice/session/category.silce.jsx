@@ -4,11 +4,12 @@ import instance from "../../axios/axios";
 
 const initialState = {
   categorieslistData: {},
-  categoriesList: {},
+  categoryData: {},
 };
 
+
 export const addCategories = createAsyncThunk(
-  "/categories/register",
+  "/categories",
   async (params, { rejectWithValue }) => {
     try {
       return await instance.post("/product-categories", params);
@@ -17,6 +18,7 @@ export const addCategories = createAsyncThunk(
     }
   }
 );
+
 
 export const categoriesList = createAsyncThunk(
   "/categories",
@@ -29,9 +31,7 @@ export const categoriesList = createAsyncThunk(
   }
 );
 
-export const categoriesTrush = createAsyncThunk(
-  "categories/trush",
-  async (id, { rejectWithValue }) => {
+export const categoriesTrush = createAsyncThunk( "categories/trush", async (id, { rejectWithValue }) => {
     try {
       return await instance.delete(`categories/${id}`);
     } catch (error) {
@@ -52,11 +52,9 @@ export const categoriesUpdate = createAsyncThunk(
   }
 );
 
-export const categoriesListById = createAsyncThunk(
-  "categories/list/id",
-  async (id, { rejectWithValue }) => {
+export const categoriesListById = createAsyncThunk( "categories/list", async (id, { rejectWithValue }) => {
     try {
-      return await instance.get(`categories/${id}` , console.log("listbyid",id));
+      return await instance.get(`product-categories/${id}` );
     } catch (error) {
       return rejectWithValue(error.responce);
     }
@@ -79,46 +77,53 @@ const categoriesSlice = createSlice({
       })
       .addCase(categoriesList.rejected, (state) => {
         state.loading = false;
-        state.categoriesList = {};
-      })
-      .addCase(categoriesTrush.pending, (state) => {
-        state.loading = false;
         state.categorieslistData = {};
       })
-      .addCase(categoriesTrush.fulfilled, (state, action) => {
-        state.loading = false;
-        state.categorieslistData = action.payload;
-        toast.success(action.payload.message);
-      })
-      .addCase(categoriesTrush.rejected, (state) => {
-        state.loading = false;
-        state.categoriesList = {};
-      })
+
+
       .addCase(categoriesUpdate.pending, (state) => {
         state.loading = false;
-        state.categorieslistData = {};
+        state.categoryData = {};
       })
       .addCase(categoriesUpdate.fulfilled, (state, action) => {
         state.loading = false;
-        state.categorieslistData = action.payload;
+        state.categoryData = action.payload;
         toast.success(action.payload.message);
       })
       .addCase(categoriesUpdate.rejected, (state) => {
         state.loading = false;
-        state.categoriesList = {};
+        state.categoryData = {};
       })
+
+
       .addCase(categoriesListById.pending, (state) => {
         state.loading = false;
-        state.categorieslistData = {};
+        state.categoryData = {};
       })
       .addCase(categoriesListById.fulfilled, (state, action) => {
         state.loading = false;
-        state.categorieslistData = action.payload;
+        state.categoryData = action.payload;
       })
       .addCase(categoriesListById.rejected, (state) => {
         state.loading = false;
-        state.categoriesList = {};
-      });
+        state.categoryData = {};
+      })
+
+
+      .addCase(categoriesTrush.pending, (state) => {
+        state.loading = false;
+        state.categoryData = {};
+      })
+      .addCase(categoriesTrush.fulfilled, (state, action) => {
+        state.loading = false;
+        state.categoryData = action.payload;
+        toast.success(action.payload.message);
+      })
+      .addCase(categoriesTrush.rejected, (state) => {
+        state.loading = false;
+        state.categoryData = {};
+      })
+
   },
 });
 

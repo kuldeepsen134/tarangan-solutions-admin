@@ -5,14 +5,13 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Auth/Login";
 import { ToastContainer } from "react-toastify";
 import Users from "./pages/Users/Users";
-import CreateUser from "./pages/Users/CreateUser";
-import UpdateUser from "./pages/Users/UpdateUser";
 import CreateFood from "./pages/product/CreateFood";
 import Categories from "./pages/Categories/Categories";
-import CreateCategories from "./pages/Categories/CreateCategories";
 import UserSingle from "./pages/Users/userSingle";
 import UpdateFood from "./pages/product/UpdateFood";
 import ProductPage from "./pages/product/Product";
+import BrandPage from "./pages/product/Brand";
+import OrderPage from "./pages/order/Order";
 const App = () => {
   // const token = localStorage.getItem("token");
   // const isAuthenticated = !!token;
@@ -24,9 +23,7 @@ const App = () => {
           <Route path="/" element={<Login />} />
           <Route path="/dashboard" element={<Home />} />
           
-          <Route path="/createUsers" element={<CreateUser />} />
 
-          <Route path="/updateusers/:id" element={<UpdateUser />} />
           <Route path="/updatefood/:id" element={<UpdateFood />} />
 
           <Route path="/users" element={<Users />} />
@@ -34,9 +31,12 @@ const App = () => {
           
           
           <Route path="/products" element={<ProductPage />} />
+          <Route path="/brands" element={<BrandPage />} />
+          <Route path="/orders" element={<OrderPage />} />
+
+
           <Route path="/categories" element={<Categories />} />
 
-          <Route path="/createcategories" element={<CreateCategories />} />
           <Route path="/createfoods" element={<CreateFood />} />
 
         </Routes>

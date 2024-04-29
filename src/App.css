@@ -215,3 +215,9 @@ ul.user-profile-card li {
   display: flex;
   justify-content: space-between;
 }
+
+
+.sidebar-box ul li a {
+  width: auto;
+  display: block;
+}
