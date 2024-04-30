@@ -32,7 +32,6 @@ const Login = () => {
 
     onSubmit: (values) => {
       dispatch(login(values))
-        .unwrap()
         .then(() => {
           navigate("/dashboard");
         });
