@@ -3,7 +3,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const instance = axios.create({
-  baseURL: `http://192.168.0.23:2024/api`,
+  baseURL: `${process.env.REACT_APP_BASE_ENDPOINT}`,
   withCredentials: true,
   headers: {
     Authorization: `${localStorage.getItem("token")}`,

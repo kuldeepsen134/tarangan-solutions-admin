@@ -221,3 +221,10 @@ ul.user-profile-card li {
   width: auto;
   display: block;
 }
+
+.preloader-box {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
